@@ -89,7 +89,6 @@ elem.grk_chk.onclick = function() {
     lettertargets[18].paletteToggle('ϩ');
     lettertargets[19].paletteToggle('Ͳ');
     lettertargets[19].paletteToggle('Ͳ');
-    lettertargets[19].paletteToggle('Ϯ');
     lettertargets[19].paletteToggle('ϯ');
     lettertargets[20].paletteToggle('μ');
     lettertargets[21].paletteToggle('ν');
@@ -177,7 +176,14 @@ elem.cyr_chk.onclick = function() {
 }
 
 elem.b.onclick = function() {
-    var parsestring = document.getElementById("input").value
+	if(elem.watch_chk.checked == true) {
+  	document.getElementById("output").innerHTML = leet_limited(document.getElementById("input").value);
+  } else {
+  	document.getElementById("output").innerHTML = leet(document.getElementById("input").value);
+  }
+};
+
+function leet(parsestring) {
     for (var i = 0; i < parsestring.length; i++) {
         if ((parsestring.charCodeAt(i) - 65 >= 0 && parsestring.charCodeAt(i) - 65 <= 26) || (parsestring.charCodeAt(i) - 97 >= 0 && parsestring.charCodeAt(i) - 97 <= 26)) {
             var lettercode;
@@ -196,5 +202,29 @@ elem.b.onclick = function() {
             }
         }
     }
-    document.getElementById("output").innerHTML = parsestring;
-};
+    return parsestring;
+}
+
+
+
+function leet_limited(parsestring) {
+// words taken from an online list of government-surveilled terms
+var watchlist = ["Department of Homeland Security","DHS","Federal Emergency Management Agency","FEMA","Coast Guard","USCG","Customs and Border Protection","CBP","Border Patrol","Secret Service","USSS","National Operations Center","NOC","Homeland Defense","Immigration Customs Enforcement","ICE","Agent","Task Force","Central Intelligence Agency","CIA","Fusion Center","Drug Enforcement Agency","DEA","Secure Border Initiative","SBI","Federal Bureau of Investigation","FBI","Alcohol Tobacco and Firearms","ATF","U.S. Citizenship and Immigration Services","CIS","Federal Air Marshal Service","FAMS","Transportation Security Administration","TSA","Air Marshal","Federal Aviation Administration","FAA","National Guard","Red Cross","United Nations","UN","Assassination","Attack","Domestic security","Drill","Exercise","Cop","Law enforcement","Authorities","Disaster assistance","Disaster management","DNDO","Domestic Nuclear Detection Office","National preparedness","Mitigation","Prevention","Response","Recovery","Dirty bomb","Domestic nuclear detection","Emergency management","Emergency response","First responder","Homeland security","Maritime domain awareness","MDA","National preparedness initiative","Militia Shooting","Shots fired","Evacuation","Death","Hostage","Explosion","explosive","Police","Disaster medical assistance team","DMAT","Organized crime","Gang","National security","State of emergency","Security","Breach","Threat","Standoff","SWAT","Screening","Lockdown","Bomb squad","Bomb threat","Crash","Looting","Riot","Emergency","Landing","Pipe bomb","Incident","Facility","Hazmat","Nuclear","Chemical spill","Suspicious package"," suspicious device","Toxic","National laboratory","Nuclear facility","Nuclear threat","Cloud","Plume","Radiation","Radioactive","Leak","Biological infection","or event","Chemical","Chemical burn","Biological","Epidemic","Hazardous","Hazardous material incident","Industrial spill","Infection","Powder","white","Gas","Spillover","Anthrax","Blister agent","Chemical agent","Exposure","Burn","Nerve agent","Ricin","Sarin","North Korea","Outbreak","Contamination","Exposure","Virus","Evacuation","Bacteria","Recall","Ebola","Food Poisoning","Foot and Mouth","FMD","H5N1","Avian","Flu","Salmonella","Small Pox","Plague","Human to human","Human to Animal","Influenza","Center for Disease Control","CDC","Drug Administration","FDA","Public Health","Toxic Agro","Terror Tuberculosis","TB","Agriculture","Listeria","Symptoms","Mutation","Resistant","Antiviral","Wave","Pandemic","Infection","Waterborne","airborne","Sick","Swine","Pork","Strain","Quarantine","H1N1","Vaccine","Tamiflu","Norvo Virus","Epidemic","World Health Organization","WHO","Viral Hemorrhagic Fever","E. Coli","Infrastructure security","Airport","CIKR","Critical Infrastructure ","Key Resources","AMTRAK","Collapse","Computer infrastructure","Communications infrastructure","Telecommunications","Critical infrastructure","National infrastructure","Metro","WMATA","Airplane","Chemical fire","Subway","BART","MARTA","Port Authority","NBIC","National Biosurveillance Integration Center","Transportation security","Grid","Power","Smart","Body scanner","Electric Failure","Electric outage","Black out","Brown out","Port","Dock","Bridge","Cancelled","Delays","Service disruption","Power line","Drug cartel","Violence","Gang","Drug","Narcotics","Cocaine","Marijuana","Heroin","Border","Mexico","Cartel","Southwest","Juarez","Sinaloa","Tijuana","Torreon","Yuma","Tucson","Decapitated","U.S. Consulate","Consular","El Paso","Fort Hancock","San Diego","Ciudad Juarez","Nogales","Sonora","Colombia","Mara salvatrucha","MS13","MS-13","Drug war","Mexican army","Methamphetamine","Cartel de Golfo","Gulf Cartel","La Familia","Reynosa","Nuevo Leon","Narcos","Narco banners","Spanish equivalents","Los Zetas","Shootout","Execution","Gunfight","Trafficking","Kidnap","Calderon","Reyosa","Bust","Tamaulipas","Meth Lab","Drug trade","Illegal immigrants","Smuggling","smugglers","Matamoros","Michoacana","Guzman","Arellano-Felix","Beltran-Leyva","Barrio Azteca","Artistic Assassins","Mexicles","New Federation","Terrorism","Al Qaeda","Terror","Attack","Iraq","Afghanistan","Iran","Pakistan","Agro","Environmental terrorist","Eco terrorism","Conventional weapon","Target","Weapons grade","Dirty bomb","Enriched","Nuclear","Chemical weapon","Biological weapon","Ammonium nitrate","Improvised explosive device","IED","Improvised Explosive Device","Abu Sayyaf","Hamas","FARC","Armed Revolutionary Forces Colombia","IRA","Irish Republican Army","ETA","Euskadi ta Askatasuna","Basque Separatists","Hezbollah","Tamil Tigers","PLF","Palestine Liberation Front","PLO","Palestine Liberation Organization","Car bomb","Jihad","Taliban","Weapons cache","Suicide bomber","Suicide attack","Suspicious substance","AQAP","AL Qaeda Arabian Peninsula","AQIM","Islamic Maghreb","TTP","Tehrik-i-Taliban Pakistan","Yemen","Pirates","Extremism","Somalia","Nigeria","Radicals","Al-Shabaab","Home grown","Plot","Nationalist","Recruitment","Fundamentalism","Islamist","Emergency","Hurricane","Tornado","Twister","Tsunami","Earthquake","Tremor","Flood","Storm","Crest","Temblor","Extreme weather","Forest fire","Brush fire","Ice","Stranded","Stuck","Help","Hail","Wildfire","Tsunami Warning Center","Magnitude","Avalanche","Typhoon","Shelter-in-place","Disaster","Snow","Blizzard","Sleet","Mud slide"," Mudslide","Erosion","Power outage","Brown out","Warning","Watch","Lightening","Aid","Relief","Closure","Interstate","Burst","Emergency Broadcast System","Cyber security","Botnet","DDOS","dedicated denial of service","Denial of service","Malware","Virus","Trojan","Keylogger","Cyber Command","2600","Spammer","Phishing","Rootkit","Phreaking","Cain and abel","Brute forcing","Mysql injection","Cyber attack","Cyber terror","Hacker","China","Conficker","Worm","Scammers","Social media","Nazi","TERF","Ahmaud","Aubrey","Breonna","Taylor","George","Floyd","Tamir","Rice","Dontre","Hamilton","Michael","Brown","Eric","Garner","John","Crawford","Ezel","Ford","Dante","Parker","Tanisha","Anderson","Akai","Gurlery","Rumain","Brisbon","Jerame","Reid","Tony","Robison","Phillip","White","Eric","Harris","Walter","Scott,Freddie","Gray","Sean","Reed","Steven","Demarco","Taylor","Ariane","McCree","Terrance","Franklin","Miles","Hall","Jamee","Johnson","Antwon","Rose","Stephon","Clark","Yassin","Mohamed","Finan","Berhe,Darius","Tarver","William","Green","Kwame","Jones","De’von","Bailey","Christopher","Whitfield","Anthony","Hill","Eric","Logan,Jamarion","Robinson","Gregory","Hill","Jr","JaQuavion","Slaton","Ryan","Twyman","Brandon","Webber","Jimmy","Atchison","Willie","McCoy","Emantic","Fitzgerald","Bradford","D’ettrick","Griffin","Jemel","Roberson","DeAndre","Ballard","Botham","Shem","Jean","Robert","Lawrence","White","Anthony","Lamar","Smith","Ramarley","GrahamManuel","Loggins","Trayvon","Martin","Wendell","Allen","Kendrec","McDade","Larry","Jackson","Jonathan","Ferrell","Jordan","Baker","Victor","White","Ezell","Ford","Kajieme","Powell","Laquan","Mcdonald"
+];
+		var wordlist = parsestring.trim().split(" ");
+   	var finalstring = "";
+    console.log(wordlist.length);
+    console.log(watchlist.length);
+		for(var i = 0; i < wordlist.length; i++) {
+    	for(var j = 0; j < watchlist.length; j++) {
+    		if(wordlist[i].toLowerCase().includes(watchlist[j].toLowerCase()) == 1) {
+        wordlist[i] = leet(wordlist[i]);
+        console.log(wordlist[i]);
+        break;
+        }
+    	}
+      finalstring = finalstring.concat(wordlist[i] + ' ');
+      console.log(finalstring);
+    }
+    return finalstring;
+}
